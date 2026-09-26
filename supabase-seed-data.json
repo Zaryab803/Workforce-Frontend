@@ -1,0 +1,398 @@
+{
+  "roles": [
+    {
+      "id": "10000000-0000-0000-0000-000000000001",
+      "name": "ADMIN"
+    },
+    {
+      "id": "10000000-0000-0000-0000-000000000002",
+      "name": "MANAGER"
+    },
+    {
+      "id": "10000000-0000-0000-0000-000000000003",
+      "name": "EMPLOYEE"
+    }
+  ],
+  "employees": [
+    {
+      "id": "11111111-1111-4111-8111-111111111111",
+      "employeeCode": "ORB-ADM01",
+      "name": "Alex Morgan",
+      "email": "admin@orbit.demo",
+      "phone": "+1 (415) 555-1000",
+      "role": "ADMIN",
+      "roleId": "10000000-0000-0000-0000-000000000001",
+      "teamId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "managerId": null,
+      "position": "Workspace Administrator & VP of Operations",
+      "joined": "2025-01-12",
+      "active": true,
+      "employmentStatus": "ACTIVE",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&fit=crop&crop=face",
+      "passwordDemo": "OrbitDemo2026!"
+    },
+    {
+      "id": "22222222-2222-4222-8222-222222222222",
+      "employeeCode": "ORB-MGR01",
+      "name": "Sarah Chen",
+      "email": "manager@orbit.demo",
+      "phone": "+1 (415) 555-1001",
+      "role": "MANAGER",
+      "roleId": "10000000-0000-0000-0000-000000000002",
+      "teamId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "managerId": "11111111-1111-4111-8111-111111111111",
+      "position": "Product & Design Lead",
+      "joined": "2025-02-12",
+      "active": true,
+      "employmentStatus": "ACTIVE",
+      "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&fit=crop&crop=face",
+      "passwordDemo": "OrbitDemo2026!"
+    },
+    {
+      "id": "44444444-4444-4444-8444-444444444444",
+      "employeeCode": "ORB-MGR02",
+      "name": "James Wilson",
+      "email": "james.wilson@orbit.demo",
+      "phone": "+1 (415) 555-1002",
+      "role": "MANAGER",
+      "roleId": "10000000-0000-0000-0000-000000000002",
+      "teamId": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+      "managerId": "11111111-1111-4111-8111-111111111111",
+      "position": "Engineering Lead",
+      "joined": "2025-03-12",
+      "active": true,
+      "employmentStatus": "ACTIVE",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&fit=crop&crop=face",
+      "passwordDemo": "OrbitDemo2026!"
+    },
+    {
+      "id": "66666666-6666-4666-8666-666666666666",
+      "employeeCode": "ORB-MGR03",
+      "name": "Olivia Bennett",
+      "email": "olivia.bennett@orbit.demo",
+      "phone": "+1 (415) 555-1003",
+      "role": "MANAGER",
+      "roleId": "10000000-0000-0000-0000-000000000002",
+      "teamId": "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+      "managerId": "11111111-1111-4111-8111-111111111111",
+      "position": "Growth & Marketing Lead",
+      "joined": "2025-04-12",
+      "active": true,
+      "employmentStatus": "ACTIVE",
+      "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&fit=crop&crop=face",
+      "passwordDemo": "OrbitDemo2026!"
+    },
+    {
+      "id": "33333333-3333-4333-8333-333333333333",
+      "employeeCode": "ORB-EMP01",
+      "name": "Noah Williams",
+      "email": "employee@orbit.demo",
+      "phone": "+1 (415) 555-1004",
+      "role": "EMPLOYEE",
+      "roleId": "10000000-0000-0000-0000-000000000003",
+      "teamId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "managerId": "22222222-2222-4222-8222-222222222222",
+      "position": "Senior UI/UX Designer",
+      "joined": "2025-05-12",
+      "active": true,
+      "employmentStatus": "ACTIVE",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&fit=crop&crop=face",
+      "passwordDemo": "OrbitDemo2026!"
+    },
+    {
+      "id": "55555555-5555-4555-8555-555555555555",
+      "employeeCode": "ORB-EMP02",
+      "name": "Emma Davis",
+      "email": "other.employee@orbit.demo",
+      "phone": "+1 (415) 555-1005",
+      "role": "EMPLOYEE",
+      "roleId": "10000000-0000-0000-0000-000000000003",
+      "teamId": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+      "managerId": "44444444-4444-4444-8444-444444444444",
+      "position": "Frontend Software Engineer",
+      "joined": "2025-06-12",
+      "active": true,
+      "employmentStatus": "ACTIVE",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&fit=crop&crop=face",
+      "passwordDemo": "OrbitDemo2026!"
+    },
+    {
+      "id": "77777777-7777-4777-8777-777777777777",
+      "employeeCode": "ORB-EMP03",
+      "name": "Liam Anderson",
+      "email": "liam.anderson@orbit.demo",
+      "phone": "+1 (415) 555-1006",
+      "role": "EMPLOYEE",
+      "roleId": "10000000-0000-0000-0000-000000000003",
+      "teamId": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+      "managerId": "44444444-4444-4444-8444-444444444444",
+      "position": "Backend Systems Engineer",
+      "joined": "2025-07-12",
+      "active": true,
+      "employmentStatus": "ACTIVE",
+      "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&fit=crop&crop=face",
+      "passwordDemo": "OrbitDemo2026!"
+    },
+    {
+      "id": "88888888-8888-4888-8888-888888888888",
+      "employeeCode": "ORB-EMP04",
+      "name": "Ava Thompson",
+      "email": "ava.thompson@orbit.demo",
+      "phone": "+1 (415) 555-1007",
+      "role": "EMPLOYEE",
+      "roleId": "10000000-0000-0000-0000-000000000003",
+      "teamId": "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+      "managerId": "66666666-6666-4666-8666-666666666666",
+      "position": "Brand & Content Strategist",
+      "joined": "2025-08-12",
+      "active": true,
+      "employmentStatus": "ACTIVE",
+      "avatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&fit=crop&crop=face",
+      "passwordDemo": "OrbitDemo2026!"
+    }
+  ],
+  "teams": [
+    {
+      "id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "name": "Product & Design",
+      "description": "Shaping thoughtful experiences, design systems, and product ergonomics.",
+      "managerId": "22222222-2222-4222-8222-222222222222",
+      "color": "#8b5cf6"
+    },
+    {
+      "id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+      "name": "Engineering",
+      "description": "Building high-performance cloud architecture, APIs, and web interfaces.",
+      "managerId": "44444444-4444-4444-8444-444444444444",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+      "name": "Growth & Marketing",
+      "description": "Connecting great software with customers and driving adoption metrics.",
+      "managerId": "66666666-6666-4666-8666-666666666666",
+      "color": "#f59e0b"
+    }
+  ],
+  "teamMembers": [
+    {
+      "id": "90000001-0000-0000-0000-000000000001",
+      "teamId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "userId": "22222222-2222-4222-8222-222222222222"
+    },
+    {
+      "id": "90000001-0000-0000-0000-000000000002",
+      "teamId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "userId": "33333333-3333-4333-8333-333333333333"
+    },
+    {
+      "id": "90000001-0000-0000-0000-000000000003",
+      "teamId": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+      "userId": "44444444-4444-4444-8444-444444444444"
+    },
+    {
+      "id": "90000001-0000-0000-0000-000000000004",
+      "teamId": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+      "userId": "55555555-5555-4555-8555-555555555555"
+    },
+    {
+      "id": "90000001-0000-0000-0000-000000000005",
+      "teamId": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+      "userId": "77777777-7777-4777-8777-777777777777"
+    },
+    {
+      "id": "90000001-0000-0000-0000-000000000006",
+      "teamId": "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+      "userId": "66666666-6666-4666-8666-666666666666"
+    },
+    {
+      "id": "90000001-0000-0000-0000-000000000007",
+      "teamId": "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+      "userId": "88888888-8888-4888-8888-888888888888"
+    }
+  ],
+  "projects": [
+    {
+      "id": "d0000000-0000-0000-0000-000000000001",
+      "name": "Orbit Workspace",
+      "description": "Core workforce orchestration portal and real-time activity hub.",
+      "status": "ACTIVE",
+      "teamId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "createdBy": "22222222-2222-4222-8222-222222222222"
+    },
+    {
+      "id": "d0000000-0000-0000-0000-000000000002",
+      "name": "Customer Portal",
+      "description": "Self-service dashboard and project delivery tracking for clients.",
+      "status": "ACTIVE",
+      "teamId": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+      "createdBy": "44444444-4444-4444-8444-444444444444"
+    },
+    {
+      "id": "d0000000-0000-0000-0000-000000000003",
+      "name": "Brand Refresh 2026",
+      "description": "Global design system evolution, typography updates, and visual identity.",
+      "status": "ACTIVE",
+      "teamId": "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+      "createdBy": "66666666-6666-4666-8666-666666666666"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "e0000000-0000-0000-0000-000000000001",
+      "title": "Redesign the onboarding experience",
+      "description": "Create a modern, friction-free onboarding wizard with step validation, role assignment, and guided tours.",
+      "project": "Orbit Workspace",
+      "projectId": "d0000000-0000-0000-0000-000000000001",
+      "teamId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "assigneeId": "33333333-3333-4333-8333-333333333333",
+      "creatorId": "22222222-2222-4222-8222-222222222222",
+      "priority": "HIGH",
+      "status": "IN_PROGRESS",
+      "dueDate": "2026-10-15",
+      "estimatedHours": 18,
+      "actualHours": 9.5,
+      "createdAt": "2026-09-20T08:30:00.000Z",
+      "updatedAt": "2026-09-24T14:20:00.000Z"
+    },
+    {
+      "id": "e0000000-0000-0000-0000-000000000002",
+      "title": "Build interactive analytics charts",
+      "description": "Implement Recharts or Tremor visualizations for workforce workload, weekly task velocity, and team capacity.",
+      "project": "Orbit Workspace",
+      "projectId": "d0000000-0000-0000-0000-000000000001",
+      "teamId": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+      "assigneeId": "55555555-5555-4555-8555-555555555555",
+      "creatorId": "44444444-4444-4444-8444-444444444444",
+      "priority": "URGENT",
+      "status": "TODO",
+      "dueDate": "2026-10-08",
+      "estimatedHours": 14,
+      "actualHours": 2,
+      "createdAt": "2026-09-21T09:00:00.000Z",
+      "updatedAt": "2026-09-22T11:00:00.000Z"
+    },
+    {
+      "id": "e0000000-0000-0000-0000-000000000003",
+      "title": "Optimize PostgreSQL query latency on Supabase",
+      "description": "Add composite indexes on tasks(team_id, status) and users(email, is_active) to keep dashboard queries under 30ms.",
+      "project": "Customer Portal",
+      "projectId": "d0000000-0000-0000-0000-000000000002",
+      "teamId": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+      "assigneeId": "77777777-7777-4777-8777-777777777777",
+      "creatorId": "44444444-4444-4444-8444-444444444444",
+      "priority": "HIGH",
+      "status": "IN_REVIEW",
+      "dueDate": "2026-10-05",
+      "estimatedHours": 8,
+      "actualHours": 7.5,
+      "createdAt": "2026-09-18T10:15:00.000Z",
+      "updatedAt": "2026-09-25T11:45:00.000Z"
+    },
+    {
+      "id": "e0000000-0000-0000-0000-000000000004",
+      "title": "Ship design system tokens and dark mode contrast",
+      "description": "Align Tailwind CSS colors, border radius, elevation tokens, and WCAG AA contrast compliance across dark mode.",
+      "project": "Brand Refresh 2026",
+      "projectId": "d0000000-0000-0000-0000-000000000003",
+      "teamId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "assigneeId": "33333333-3333-4333-8333-333333333333",
+      "creatorId": "22222222-2222-4222-8222-222222222222",
+      "priority": "MEDIUM",
+      "status": "COMPLETED",
+      "dueDate": "2026-09-22",
+      "estimatedHours": 12,
+      "actualHours": 11,
+      "createdAt": "2026-09-12T08:00:00.000Z",
+      "updatedAt": "2026-09-22T17:00:00.000Z"
+    },
+    {
+      "id": "e0000000-0000-0000-0000-000000000005",
+      "title": "Prepare Q4 product changelog & launch announcement",
+      "description": "Draft customer-facing release notes detailing team collaboration tools, kanban filters, and Supabase integration.",
+      "project": "Brand Refresh 2026",
+      "projectId": "d0000000-0000-0000-0000-000000000003",
+      "teamId": "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+      "assigneeId": "88888888-8888-4888-8888-888888888888",
+      "creatorId": "66666666-6666-4666-8666-666666666666",
+      "priority": "LOW",
+      "status": "BLOCKED",
+      "dueDate": "2026-10-25",
+      "estimatedHours": 6,
+      "actualHours": 1.5,
+      "createdAt": "2026-09-22T13:00:00.000Z",
+      "updatedAt": "2026-09-24T16:10:00.000Z"
+    }
+  ],
+  "comments": [
+    {
+      "id": "f0000000-0000-0000-0000-000000000001",
+      "taskId": "e0000000-0000-0000-0000-000000000001",
+      "authorId": "22222222-2222-4222-8222-222222222222",
+      "body": "Initial wireframes look great! Please ensure mobile responsive viewports are verified before closing.",
+      "createdAt": "2026-09-21T11:00:00.000Z"
+    },
+    {
+      "id": "f0000000-0000-0000-0000-000000000002",
+      "taskId": "e0000000-0000-0000-0000-000000000001",
+      "authorId": "33333333-3333-4333-8333-333333333333",
+      "body": "Updated with 375px and 768px tablet layout variants. Ready for design team review.",
+      "createdAt": "2026-09-24T14:15:00.000Z"
+    },
+    {
+      "id": "f0000000-0000-0000-0000-000000000003",
+      "taskId": "e0000000-0000-0000-0000-000000000003",
+      "authorId": "44444444-4444-4444-8444-444444444444",
+      "body": "Query plans look healthy in Supabase explain analyze. Down to 14ms from 180ms.",
+      "createdAt": "2026-09-25T11:40:00.000Z"
+    }
+  ],
+  "workActivities": [
+    {
+      "id": "a1000000-0000-0000-0000-000000000001",
+      "taskId": "e0000000-0000-0000-0000-000000000001",
+      "userId": "33333333-3333-4333-8333-333333333333",
+      "hours": 5.5,
+      "description": "Constructed reusable multi-step stepper component with keyboard navigation.",
+      "activityDate": "2026-09-22"
+    },
+    {
+      "id": "a1000000-0000-0000-0000-000000000002",
+      "taskId": "e0000000-0000-0000-0000-000000000001",
+      "userId": "33333333-3333-4333-8333-333333333333",
+      "hours": 4.0,
+      "description": "Implemented validation schemas with Zod and connected error feedback banners.",
+      "activityDate": "2026-09-24"
+    },
+    {
+      "id": "a1000000-0000-0000-0000-000000000003",
+      "taskId": "e0000000-0000-0000-0000-000000000003",
+      "userId": "77777777-7777-4777-8777-777777777777",
+      "hours": 7.5,
+      "description": "Created database migration adding btree indexes on foreign keys and compound status filters.",
+      "activityDate": "2026-09-25"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "b1000000-0000-0000-0000-000000000001",
+      "userId": "33333333-3333-4333-8333-333333333333",
+      "type": "TASK_ASSIGNED",
+      "title": "New Task Assigned",
+      "body": "Sarah Chen assigned you to “Redesign the onboarding experience”.",
+      "taskId": "e0000000-0000-0000-0000-000000000001",
+      "read": false,
+      "createdAt": "2026-09-20T08:30:00.000Z"
+    },
+    {
+      "id": "b1000000-0000-0000-0000-000000000002",
+      "userId": "44444444-4444-4444-8444-444444444444",
+      "type": "TASK_STATUS_CHANGED",
+      "title": "Task Ready for Review",
+      "body": "Liam Anderson moved “Optimize PostgreSQL query latency on Supabase” to In Review.",
+      "taskId": "e0000000-0000-0000-0000-000000000003",
+      "read": true,
+      "createdAt": "2026-09-25T11:45:00.000Z"
+    }
+  ]
+}
