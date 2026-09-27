@@ -16,7 +16,7 @@ export function subscribeToTask(taskId: string) {
   if (!taskId) return;
   subscribedTasks.add(taskId);
   if (socketInstance && socketInstance.connected) {
-    socketInstance.emit("task:subscribe", { taskId });
+    socketInstance.emit("task:subscribe", { taskId }, () => {});
   }
 }
 
@@ -24,13 +24,27 @@ export function unsubscribeFromTask(taskId: string) {
   if (!taskId) return;
   subscribedTasks.delete(taskId);
   if (socketInstance && socketInstance.connected) {
-    socketInstance.emit("task:unsubscribe", { taskId });
+    socketInstance.emit("task:unsubscribe", { taskId }, () => {});
   }
 }
 
+function getSocketUrl(): string {
+  if (process.env.NEXT_PUBLIC_SOCKET_URL) {
+    return process.env.NEXT_PUBLIC_SOCKET_URL;
+  }
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    try {
+      const u = new URL(process.env.NEXT_PUBLIC_API_URL);
+      return u.origin;
+    } catch {
+      // fallback
+    }
+  }
+  return "http://localhost:4000";
+}
+
 export function initRealtime(queryClient: QueryClient): () => void {
-  const socketUrl =
-    process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:4000";
+  const socketUrl = getSocketUrl();
 
   if (socketInstance) {
     return () => {};
@@ -50,7 +64,7 @@ export function initRealtime(queryClient: QueryClient): () => void {
   socket.on("connect", () => {
     // Re-subscribe to any active tasks
     for (const taskId of subscribedTasks) {
-      socket.emit("task:subscribe", { taskId });
+      socket.emit("task:subscribe", { taskId }, () => {});
     }
   });
 
@@ -79,6 +93,15 @@ export function initRealtime(queryClient: QueryClient): () => void {
     void queryClient.invalidateQueries({ queryKey: ["notifications"] });
     void queryClient.invalidateQueries({ queryKey: ["dashboard"] });
     toast.info("You have a new notification");
+  });
+
+  socket.on("disconnect", async (reason) => {
+    if (reason === "io server disconnect") {
+      const newToken = await restoreSession();
+      if (newToken) {
+        socket.connect();
+      }
+    }
   });
 
   socket.on("connect_error", async (error) => {

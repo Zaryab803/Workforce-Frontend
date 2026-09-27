@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -13,6 +13,7 @@ import {
 import { taskApi } from "@/lib/api/task.api";
 import { useAction, useUser } from "@/hooks/use-data";
 import { statuses } from "@/types";
+import { subscribeToTask, unsubscribeFromTask } from "@/lib/realtime";
 import {
   AnimatedPage,
   PageHeader,
@@ -27,6 +28,15 @@ import { Button } from "@/components/ui/button";
 import { date, label } from "@/lib/utils";
 import { TaskForm } from "./task-form";
 export function TaskDetail({ id }: { id: string }) {
+  useEffect(() => {
+    if (id) {
+      subscribeToTask(id);
+      return () => {
+        unsubscribeFromTask(id);
+      };
+    }
+  }, [id]);
+
   const q = useQuery({
     queryKey: ["task", id],
     queryFn: () => taskApi.detail(id),

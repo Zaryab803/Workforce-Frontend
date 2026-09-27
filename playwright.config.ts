@@ -5,12 +5,22 @@ export default defineConfig({
   workers: 1,
   timeout: 60_000,
   expect: { timeout: 15_000 },
-  use: { baseURL: "http://127.0.0.1:3000", trace: "retain-on-failure" },
-  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
+  use: {
+    baseURL: "http://localhost:3000",
+    channel: "chrome",
+    trace: "retain-on-failure",
+    screenshot: "only-on-failure",
+  },
+  projects: [
+    {
+      name: "chrome",
+      use: { ...devices["Desktop Chrome"], channel: "chrome" },
+    },
+  ],
   webServer: {
-    command: "npm run start -- --hostname 127.0.0.1",
-    url: "http://127.0.0.1:3000/login",
-    reuseExistingServer: !process.env.CI,
+    command: "npm run dev",
+    url: "http://localhost:3000/login",
+    reuseExistingServer: true,
     timeout: 120_000,
   },
 });

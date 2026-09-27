@@ -53,8 +53,12 @@ export function getAccessToken(): string | null {
   return null;
 }
 
-const API_BASE =
+const rawApiUrl =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api/v1";
+const cleanApiUrl = rawApiUrl.replace(/\/+$/, "");
+const API_BASE = cleanApiUrl.endsWith("/api/v1")
+  ? cleanApiUrl
+  : `${cleanApiUrl}/api/v1`;
 
 export const apiClient: AxiosInstance = axios.create({
   baseURL: API_BASE,
@@ -96,8 +100,9 @@ export async function restoreSession(): Promise<string | null> {
 // Request interceptor to attach Bearer access token
 apiClient.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
-    if (inMemoryToken) {
-      config.headers.set("Authorization", `Bearer ${inMemoryToken}`);
+    const token = getAccessToken();
+    if (token) {
+      config.headers.set("Authorization", `Bearer ${token}`);
     }
     config.headers.set("X-CSRF-Protection", "1");
     return config;

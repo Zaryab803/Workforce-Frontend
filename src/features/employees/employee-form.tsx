@@ -102,14 +102,14 @@ export function EmployeeForm({
             <input className="input" type="date" {...form.register("joined")} />
           </Field>
           <Field
-            label={employee ? "New password (optional)" : "Initial password"}
+            label={employee ? "New password (optional)" : "Initial password (optional, min 10 chars)"}
             error={e.password?.message}
           >
             <input
               className="input"
               type="password"
               autoComplete="new-password"
-              required={!employee}
+              placeholder={employee ? "Leave blank to keep current" : "Leave blank for default (Demo123!)"}
               {...form.register("password")}
             />
           </Field>

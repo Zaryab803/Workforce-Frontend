@@ -19,12 +19,18 @@ export const taskApi = {
     return res.data;
   },
 
-  update: async (id: string, data: TaskInput): Promise<Task> => {
+  update: async (
+    id: string,
+    data: TaskInput & { version?: number },
+  ): Promise<Task> => {
     const res = await apiClient.patch<Task>(`/tasks/${id}`, data);
     return res.data;
   },
 
-  save: async (data: TaskInput, id?: string): Promise<Task> => {
+  save: async (
+    data: TaskInput & { version?: number },
+    id?: string,
+  ): Promise<Task> => {
     return id ? taskApi.update(id, data) : taskApi.create(data);
   },
 

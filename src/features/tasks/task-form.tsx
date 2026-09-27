@@ -58,7 +58,11 @@ export function TaskForm({
       );
   }, [open, task, form]);
   const action = useAction(
-    (values: TaskInput) => taskApi.save(values, task?.id),
+    (values: TaskInput) =>
+      taskApi.save(
+        task ? { ...values, version: (task as any).version || 1 } : values,
+        task?.id,
+      ),
     task ? "Task updated" : "A new task is ready to go",
     () => onOpenChange(false),
   );

@@ -39,7 +39,16 @@ export const employeeSchema = z.object({
   position: z.string().min(2).max(100),
   password: z
     .string()
-    .refine((v) => !v || v.length >= 8, "Use at least 8 characters"),
+    .refine(
+      (v) =>
+        !v ||
+        (v.length >= 10 &&
+          /[a-z]/.test(v) &&
+          /[A-Z]/.test(v) &&
+          /[0-9]/.test(v) &&
+          /[^A-Za-z0-9]/.test(v)),
+      "Must be at least 10 characters with uppercase, lowercase, number, and symbol",
+    ),
 });
 export const teamSchema = z.object({
   name: z.string().trim().min(2).max(100),
