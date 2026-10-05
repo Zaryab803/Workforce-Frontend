@@ -105,11 +105,6 @@ export function AppShell({ children }: { children: ReactNode }) {
     router.replace("/login");
   });
   useEffect(() => {
-    if (typeof window !== "undefined" && window.innerWidth <= 900) {
-      setSidebarOpen(false);
-    }
-  }, [pathname, setSidebarOpen]);
-  useEffect(() => {
     if (!sidebarOpen && !notifications) return;
     const close = (e: KeyboardEvent) => {
       if (e.key === "Escape") {

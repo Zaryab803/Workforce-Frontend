@@ -138,61 +138,63 @@ export function AppSidebar({
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <p className="nav-label">WORKSPACE</p>
-      <nav aria-label="Main navigation">
-        {navLinks
-          .filter((l) => routeAllowed(l.href, user.role))
-          .map((l) => {
-            const active = pathname.startsWith(l.href);
-            return (
-              <Link
-                key={l.href}
-                href={l.href}
-                className={cn("nav-item", active && "active")}
-                aria-current={active ? "page" : undefined}
-                onClick={handleNavClick}
-              >
-                {active && (
-                  <motion.span
-                    className="nav-active-bg"
-                    layoutId="nav-highlight"
-                    transition={{
-                      type: "spring",
-                      stiffness: 380,
-                      damping: 32,
-                    }}
-                  />
-                )}
-                <l.icon size={19} />
-                <span>
-                  {l.href === "/tasks" && user.role === "EMPLOYEE"
-                    ? "My tasks"
-                    : l.title}
-                </span>
-                {l.href === "/board" && <span className="nav-new">NEW</span>}
-              </Link>
-            );
-          })}
-      </nav>
+      <div className="sidebar-scroll-area">
+        <p className="nav-label">WORKSPACE</p>
+        <nav aria-label="Main navigation">
+          {navLinks
+            .filter((l) => routeAllowed(l.href, user.role))
+            .map((l) => {
+              const active = pathname.startsWith(l.href);
+              return (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className={cn("nav-item", active && "active")}
+                  aria-current={active ? "page" : undefined}
+                  onClick={handleNavClick}
+                >
+                  {active && (
+                    <motion.span
+                      className="nav-active-bg"
+                      layoutId="nav-highlight"
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 32,
+                      }}
+                    />
+                  )}
+                  <l.icon size={19} />
+                  <span>
+                    {l.href === "/tasks" && user.role === "EMPLOYEE"
+                      ? "My tasks"
+                      : l.title}
+                  </span>
+                  {l.href === "/board" && <span className="nav-new">NEW</span>}
+                </Link>
+              );
+            })}
+        </nav>
 
-      <p className="nav-label mt-7">PERSONAL</p>
-      <Link
-        className={cn("nav-item", pathname === "/notifications" && "active")}
-        href="/notifications"
-        onClick={handleNavClick}
-      >
-        <Bell size={19} />
-        <span>Notifications</span>
-        {!!unread && <span className="nav-count">{unread}</span>}
-      </Link>
-      <Link
-        className={cn("nav-item", pathname === "/profile" && "active")}
-        href="/profile"
-        onClick={handleNavClick}
-      >
-        <Users size={19} />
-        <span>My profile</span>
-      </Link>
+        <p className="nav-label mt-7">PERSONAL</p>
+        <Link
+          className={cn("nav-item", pathname === "/notifications" && "active")}
+          href="/notifications"
+          onClick={handleNavClick}
+        >
+          <Bell size={19} />
+          <span>Notifications</span>
+          {!!unread && <span className="nav-count">{unread}</span>}
+        </Link>
+        <Link
+          className={cn("nav-item", pathname === "/profile" && "active")}
+          href="/profile"
+          onClick={handleNavClick}
+        >
+          <Users size={19} />
+          <span>My profile</span>
+        </Link>
+      </div>
 
       <div className="sidebar-bottom">
         <div className="sidebar-note">

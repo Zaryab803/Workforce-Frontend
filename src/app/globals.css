@@ -414,26 +414,33 @@ textarea.input {
   left: 0;
   top: 0;
   bottom: 0;
+  height: 100vh;
   background: var(--sidebar);
   border-right: 1px solid var(--border);
-  padding: 32px 18px 14px;
+  padding: 24px 16px 14px;
   display: flex;
   flex-direction: column;
   z-index: 40;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
   will-change: transform;
+}
+.sidebar-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  padding-right: 2px;
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
 }
-.sidebar::-webkit-scrollbar {
+.sidebar-scroll-area::-webkit-scrollbar {
   width: 4px;
 }
-.sidebar::-webkit-scrollbar-track {
+.sidebar-scroll-area::-webkit-scrollbar-track {
   background: transparent;
 }
-.sidebar::-webkit-scrollbar-thumb {
+.sidebar-scroll-area::-webkit-scrollbar-thumb {
   background: var(--border);
   border-radius: 4px;
 }
@@ -649,7 +656,8 @@ textarea.input {
   justify-content: space-between;
   gap: 20px;
   padding: 0 35px;
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 30;
 }
 .breadcrumb {
