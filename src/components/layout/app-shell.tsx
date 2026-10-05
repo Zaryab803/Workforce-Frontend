@@ -24,7 +24,9 @@ import {
   X,
   Orbit,
   Plus,
+  PanelLeft,
 } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 import { useUser, useAction } from "@/hooks/use-data";
 import { useUI } from "@/store/use-ui";
 import { authApi } from "@/lib/api/auth.api";
@@ -33,6 +35,18 @@ import { label, routeAllowed, cn } from "@/lib/utils";
 import { Avatar, Loading, Empty, ErrorState } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { TaskForm } from "@/features/tasks/task-form";
+import { AppSidebar } from "@/components/app-sidebar";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
+} from "@/components/ui/dropdown-menu";
 const links = [
   { href: "/dashboard", title: "Overview", icon: LayoutDashboard },
   { href: "/employees", title: "People", icon: Users },
@@ -75,6 +89,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const client = useQueryClient();
+  const { setTheme } = useTheme();
   const { data: user, isPending, error, refetch } = useUser();
   const { sidebarOpen, setSidebarOpen } = useUI();
   const [newTask, setNewTask] = useState(false);
@@ -89,7 +104,11 @@ export function AppShell({ children }: { children: ReactNode }) {
     client.clear();
     router.replace("/login");
   });
-  useEffect(() => setSidebarOpen(false), [pathname, setSidebarOpen]);
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.innerWidth <= 900) {
+      setSidebarOpen(false);
+    }
+  }, [pathname, setSidebarOpen]);
   useEffect(() => {
     if (!sidebarOpen && !notifications) return;
     const close = (e: KeyboardEvent) => {
@@ -117,7 +136,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const unread = noticeList.filter((n: any) => !n.read).length || 0;
   const title = pathname.split("/")[1];
   return (
-    <div className="workspace">
+    <div className={cn("workspace", !sidebarOpen && "sidebar-collapsed")}>
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>
@@ -128,115 +147,28 @@ export function AppShell({ children }: { children: ReactNode }) {
           onClick={() => setSidebarOpen(false)}
         />
       )}
-      <aside className={cn("sidebar", sidebarOpen && "sidebar-open")}>
-        <div className="sidebar-brand">
-          <Logo />
-          <button
-            className="mobile-only button button-ghost button-icon"
-            aria-label="Close navigation"
-            onClick={() => setSidebarOpen(false)}
-          >
-            <X size={18} />
-          </button>
-        </div>
-        <div className="workspace-switch">
-          <span className="workspace-letter">O</span>
-          <div>
-            <strong>Orbit Studio</strong>
-            <small>Team workspace</small>
-          </div>
-          <span className="workspace-plan">DEMO</span>
-        </div>
-        <p className="nav-label">WORKSPACE</p>
-        <nav aria-label="Main navigation">
-          {links
-            .filter((l) => routeAllowed(l.href, user.role))
-            .map((l) => {
-              const active = pathname.startsWith(l.href);
-              return (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className={cn("nav-item", active && "active")}
-                  aria-current={active ? "page" : undefined}
-                >
-                  {active && (
-                    <motion.span
-                      className="nav-active-bg"
-                      layoutId="nav-highlight"
-                      transition={{
-                        type: "spring",
-                        stiffness: 380,
-                        damping: 32,
-                      }}
-                    />
-                  )}
-                  <l.icon size={19} />
-                  <span>
-                    {l.href === "/tasks" && user.role === "EMPLOYEE"
-                      ? "My tasks"
-                      : l.title}
-                  </span>
-                  {l.href === "/board" && <span className="nav-new">NEW</span>}
-                </Link>
-              );
-            })}
-        </nav>
-        <p className="nav-label mt-7">PERSONAL</p>
-        <Link
-          className={cn("nav-item", pathname === "/notifications" && "active")}
-          href="/notifications"
-        >
-          <Bell size={19} />
-          <span>Notifications</span>
-          {!!unread && <span className="nav-count">{unread}</span>}
-        </Link>
-        <Link
-          className={cn("nav-item", pathname === "/profile" && "active")}
-          href="/profile"
-        >
-          <Users size={19} />
-          <span>My profile</span>
-        </Link>
-        <div className="sidebar-bottom">
-          <div className="sidebar-note">
-            <span className="note-stars">✦</span>
-            <strong>A little focus. A lot of progress.</strong>
-            <p>Great work starts with a clear view of what’s next.</p>
-            <Link href="/board">
-              Find your focus <ArrowUpRight size={16} />
-            </Link>
-          </div>
-          <Link href="/profile" className="sidebar-user">
-            <Avatar name={user.name} />
-            <span>
-              <strong>{user.name}</strong>
-              <small>{label(user.role)}</small>
-            </span>
-            <ChevronDown size={15} />
-          </Link>
-          <button
-            className="sign-out"
-            onClick={() => logout.mutate()}
-            disabled={logout.isPending}
-          >
-            <LogOut size={15} />
-            Sign out
-          </button>
-        </div>
-      </aside>
+      <AppSidebar
+        user={user}
+        unread={unread}
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        onLogout={() => logout.mutate()}
+        isLoggingOut={logout.isPending}
+      />
       <div className="main-wrap">
         <header className="topbar">
           <div className="flex items-center gap-3">
             <Button
-              className="mobile-only"
               variant="ghost"
               size="icon"
-              aria-label="Open navigation"
-              onClick={() => setSidebarOpen(true)}
+              aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
+              title={sidebarOpen ? "Close sidebar" : "Open sidebar"}
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="cursor-pointer text-muted hover:text-text h-8 w-8"
             >
-              <Menu size={20} />
+              <PanelLeft size={18} />
             </Button>
+            <Separator orientation="vertical" className="h-4 w-px bg-border" />
             <span className="breadcrumb">
               Workspace <span>/</span>{" "}
               <strong>
@@ -324,9 +256,90 @@ export function AppShell({ children }: { children: ReactNode }) {
               </AnimatePresence>
             </div>
             <span className="topbar-divider" />
-            <Link href="/profile" aria-label="Open your profile">
-              <Avatar name={user.name} size="sm" />
-            </Link>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  type="button"
+                  className="avatar-trigger cursor-pointer rounded-full outline-none focus-visible:ring-2 focus-visible:ring-primary transition-transform hover:scale-105"
+                  aria-label="Open user profile menu"
+                >
+                  <Avatar name={user.name} size="sm" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56 p-1.5">
+                <DropdownMenuLabel className="font-normal px-2 py-2">
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-semibold leading-none">{user.name}</p>
+                    <p className="text-xs leading-none text-muted-foreground">
+                      {user.email}
+                    </p>
+                    <span className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                      {label(user.role)}
+                    </span>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link
+                    href="/profile"
+                    className="flex items-center w-full cursor-pointer"
+                  >
+                    <Users className="mr-2 h-4 w-4" />
+                    <span>My profile</span>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    href="/notifications"
+                    className="flex items-center w-full cursor-pointer"
+                  >
+                    <Bell className="mr-2 h-4 w-4" />
+                    <span>Notifications</span>
+                    {!!unread && (
+                      <span className="ml-auto text-xs font-semibold bg-primary/10 text-primary px-1.5 py-0.5 rounded-full">
+                        {unread}
+                      </span>
+                    )}
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger>
+                    <Sun className="mr-2 h-4 w-4" />
+                    <span>Theme</span>
+                  </DropdownMenuSubTrigger>
+                  <DropdownMenuSubContent>
+                    <DropdownMenuItem
+                      className="cursor-pointer"
+                      onClick={() => setTheme("light")}
+                    >
+                      <Sun className="mr-2 h-4 w-4" /> Light
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="cursor-pointer"
+                      onClick={() => setTheme("dark")}
+                    >
+                      <Moon className="mr-2 h-4 w-4" /> Dark
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="cursor-pointer"
+                      onClick={() => setTheme("system")}
+                    >
+                      <Orbit className="mr-2 h-4 w-4" /> System
+                    </DropdownMenuItem>
+                  </DropdownMenuSubContent>
+                </DropdownMenuSub>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  variant="destructive"
+                  className="cursor-pointer text-red-500 focus:text-red-500"
+                  onClick={() => logout.mutate()}
+                  disabled={logout.isPending}
+                >
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span>Sign out</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </header>
         <main id="main-content" className="main-content">

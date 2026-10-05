@@ -10,6 +10,7 @@ const variants = cva("button", {
       ghost: "button-ghost",
       outline: "button-outline",
       danger: "button-danger",
+      destructive: "button-danger",
     },
     size: { default: "", sm: "button-sm", icon: "button-icon" },
   },
@@ -33,3 +34,4 @@ export function Button({
     <Comp className={cn(variants({ variant, size, className }))} {...props} />
   );
 }
+export { variants as buttonVariants };
