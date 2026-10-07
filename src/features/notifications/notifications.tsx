@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { PushSettings } from "./push-settings";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "motion/react";
@@ -31,7 +32,8 @@ export function Notifications() {
       ? (q.data as any).items
       : [];
   const unread = noticeList.filter((n: any) => !n.read).length || 0;
-  const items: any[] = noticeList.filter((n: any) => tab === "all" || !n.read) || [];
+  const items: any[] =
+    noticeList.filter((n: any) => tab === "all" || !n.read) || [];
   return (
     <AnimatedPage>
       <PageHeader
@@ -49,6 +51,7 @@ export function Notifications() {
           </Button>
         }
       />
+      <PushSettings />
       <div className="panel no-padding">
         <div className="tabs">
           {["all", "unread"].map((t) => (
@@ -102,13 +105,15 @@ export function Notifications() {
                       <Check size={17} />
                     </Button>
                   )}
-                  <Link
-                    className="button button-ghost button-icon"
-                    aria-label="View notification task"
-                    href={"/tasks/" + n.taskId}
-                  >
-                    <ArrowUpRight size={17} />
-                  </Link>
+                  {n.taskId && (
+                    <Link
+                      className="button button-ghost button-icon"
+                      aria-label="View notification task"
+                      href={"/tasks/" + n.taskId}
+                    >
+                      <ArrowUpRight size={17} />
+                    </Link>
+                  )}
                 </div>
               </motion.div>
             ))}

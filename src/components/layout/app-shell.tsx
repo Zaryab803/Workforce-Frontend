@@ -224,7 +224,9 @@ export function AppShell({ children }: { children: ReactNode }) {
                       {noticeList.slice(0, 3).map((n: any) => (
                         <Link
                           key={n.id}
-                          href={"/tasks/" + n.taskId}
+                          href={
+                            n.taskId ? "/tasks/" + n.taskId : "/notifications"
+                          }
                           onClick={() => setNotifications(false)}
                         >
                           <span
@@ -264,7 +266,9 @@ export function AppShell({ children }: { children: ReactNode }) {
               <DropdownMenuContent align="end" className="w-56 p-1.5">
                 <DropdownMenuLabel className="font-normal px-2 py-2">
                   <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-semibold leading-none">{user.name}</p>
+                    <p className="text-sm font-semibold leading-none">
+                      {user.name}
+                    </p>
                     <p className="text-xs leading-none text-muted-foreground">
                       {user.email}
                     </p>

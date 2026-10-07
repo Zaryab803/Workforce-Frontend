@@ -1,3 +1,4 @@
+import { syncPushUser } from "../push";
 import axios, {
   type AxiosInstance,
   type AxiosRequestConfig,
@@ -21,9 +22,21 @@ const TOKEN_KEY = "orbit_access_token";
 
 let inMemoryToken: string | null = null;
 let refreshPromise: Promise<string | null> | null = null;
+const tokenListeners = new Set<(token: string | null) => void>();
+
+export function subscribeToAccessToken(
+  listener: (token: string | null) => void,
+) {
+  tokenListeners.add(listener);
+  listener(getAccessToken());
+  return () => {
+    tokenListeners.delete(listener);
+  };
+}
 
 export function setAccessToken(token: string | null) {
   inMemoryToken = token;
+  if (!token) void syncPushUser(null);
   if (typeof window !== "undefined") {
     try {
       if (token) {
@@ -35,6 +48,7 @@ export function setAccessToken(token: string | null) {
       // Ignore storage errors in private browsing
     }
   }
+  for (const listener of tokenListeners) listener(token);
 }
 
 export function getAccessToken(): string | null {

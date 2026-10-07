@@ -1,7 +1,11 @@
 "use client";
 
 import { io, Socket } from "socket.io-client";
-import { getAccessToken, restoreSession } from "./api/client";
+import {
+  getAccessToken,
+  restoreSession,
+  subscribeToAccessToken,
+} from "./api/client";
 import type { QueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
@@ -53,7 +57,7 @@ export function initRealtime(queryClient: QueryClient): () => void {
   const socket = io(socketUrl, {
     transports: ["websocket", "polling"],
     withCredentials: true,
-    autoConnect: true,
+    autoConnect: false,
     auth: (cb) => {
       cb({ token: getAccessToken() });
     },
@@ -113,7 +117,17 @@ export function initRealtime(queryClient: QueryClient): () => void {
     }
   });
 
+  // Connect only once authentication supplies a token; detach immediately on logout.
+  let currentToken: string | null = null;
+  const unsubscribeToken = subscribeToAccessToken((token) => {
+    if (token === currentToken) return;
+    currentToken = token;
+    socket.disconnect();
+    if (token) socket.connect();
+  });
+
   return () => {
+    unsubscribeToken();
     socket.disconnect();
     socketInstance = null;
   };

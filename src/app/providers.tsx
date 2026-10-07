@@ -11,6 +11,7 @@ import { Toaster } from "sonner";
 import { useState, useEffect, type ReactNode } from "react";
 import { ApiError, restoreSession } from "@/lib/api/client";
 import { initRealtime } from "@/lib/realtime";
+import { PushProvider } from "@/features/notifications/push-settings";
 
 function Toasts() {
   const { resolvedTheme } = useTheme();
@@ -71,6 +72,7 @@ export function Providers({ children }: { children: ReactNode }) {
     >
       <QueryClientProvider client={client}>
         <MotionConfig reducedMotion="user">
+          <PushProvider />
           {children}
           <Toasts />
         </MotionConfig>
